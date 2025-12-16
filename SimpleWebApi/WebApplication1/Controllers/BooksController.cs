@@ -19,5 +19,16 @@ namespace WebApplication1.Controllers
         {
             return Ok(books);
         }
+
+        [HttpGet("{id}")]
+        public ActionResult<Books> GetBookById(int id)
+        {
+            var book = books.FirstOrDefault(b => b.Id == id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            return Ok(book);
+        }
     }
 }
