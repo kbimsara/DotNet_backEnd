@@ -9,3 +9,9 @@ Accept: application/json
 ###
 GET {{rootURL}}/api/books/1
 Accept: application/json
+###
+POST {{rootURL}}/api/books
+Content-Type: application/json
+###
+PUT {{rootURL}}/api/books
+Content-Type: application/json
