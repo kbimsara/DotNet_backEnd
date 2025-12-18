@@ -15,3 +15,6 @@ Content-Type: application/json
 ###
 PUT {{rootURL}}/api/books
 Content-Type: application/json
+###
+Delete {{rootURL}}/api/books/1
+Content-Type: application/json
