@@ -30,5 +30,12 @@ namespace WebApplication1.Controllers
             }
             return Ok(book);
         }
+        [HttpPost]
+        public ActionResult<Books> CreateBook([FromBody] Books newBook)
+        {
+            newBook.Id = books.Max(b => b.Id) + 1;
+            books.Add(newBook);
+            return CreatedAtAction(nameof(GetBookById), new { id = newBook.Id }, newBook);
+        }
     }
 }
