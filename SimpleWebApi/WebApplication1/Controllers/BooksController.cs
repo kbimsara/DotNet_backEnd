@@ -31,11 +31,30 @@ namespace WebApplication1.Controllers
             return Ok(book);
         }
         [HttpPost]
-        public ActionResult<Books> CreateBook([FromBody] Books newBook)
+        public ActionResult<Books> CreateBook(Books newBook)
         {
-            newBook.Id = books.Max(b => b.Id) + 1;
-            books.Add(newBook);
-            return CreatedAtAction(nameof(GetBookById), new { id = newBook.Id }, newBook);
+            if (newBook == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                newBook.Id = books.Max(b => b.Id) + 1;
+                books.Add(newBook);
+                return CreatedAtAction(nameof(GetBookById), new { id = newBook.Id }, newBook);
+            }
+        }
+        [HttpPut("{id}")]
+        public ActionResult UpdateBook(int id, Books updatedBook)
+        {
+            var book = books.FirstOrDefault(b => b.Id == id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            book.Title = updatedBook.Title;
+            book.Author = updatedBook.Author;
+            return Ok(book);
         }
     }
 }

@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "46b83bb5-1fbe-45e6-88a8-ca8afe672f7e",
+		"name": ".net Sample Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "48037414",
+		"_collection_link": "https://kavidubim2gamaethige-5938782.postman.co/workspace/Kavidu-Bimsara's-Workspace~e04c8e77-ce97-4636-8f6b-d33ccdb2e6ec/collection/48037414-46b83bb5-1fbe-45e6-88a8-ca8afe672f7e?action=share&source=collection_link&creator=48037414"
+	},
+	"item": [
+		{
+			"name": "get all",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://localhost:7164/api/books"
+			},
+			"response": []
+		},
+		{
+			"name": "get by id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://localhost:7164/api/books/1"
+			},
+			"response": []
+		},
+		{
+			"name": "create record",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"Title\" : \"Book One\", \"Author\" : \"Author E\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:7164/api/books"
+			},
+			"response": []
+		},
+		{
+			"name": "update by id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"Title\" : \"Book Foure\", \"Author\" : \"Author E1\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:7164/api/books/4"
+			},
+			"response": []
+		}
+	]
+}
