@@ -41,7 +41,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \"Title\" : \"Book One\", \"Author\" : \"Author E\" }",
+					"raw": "{ \"Title\" : \"Book Foure\", \"Author\" : \"Author D\" }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -68,6 +68,22 @@
 							"language": "json"
 						}
 					}
+				},
+				"url": "https://localhost:7164/api/books/4"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete by id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
 				},
 				"url": "https://localhost:7164/api/books/4"
 			},

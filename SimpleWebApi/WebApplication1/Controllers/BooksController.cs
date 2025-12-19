@@ -56,5 +56,17 @@ namespace WebApplication1.Controllers
             book.Author = updatedBook.Author;
             return Ok(book);
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteBook(int id)
+        {
+            var book = books.FirstOrDefault(b => b.Id == id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+            books.Remove(book);
+            return NoContent();
+        }
     }
 }
