@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MyFirstDotNetWebApi.Data;
 using MyFirstDotNetWebApi.Models;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace MyFirstDotNetWebApi.Controllers
 {
@@ -8,56 +9,86 @@ namespace MyFirstDotNetWebApi.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        static private List<Books> books = new List<Books>
+        private readonly BooksContext _context;
+
+        public BooksController(BooksContext context)
         {
-            new Books { Id = 1, Title = "Book One", Author = "Author A" },
-            new Books { Id = 2, Title = "Book Two", Author = "Author B" },
-            new Books { Id = 3, Title = "Book Three", Author = "Author C" }
-        };
+            _context = context;
+        }
         // GET: api/Books
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
+            var books = await _context.Books.ToListAsync();
             return Ok(books);
         }
         // GET: api/Books/1
         [HttpGet("{id}")]
-        public IActionResult GetBookById(int id)
+        public async Task<IActionResult> GetBookById(int id)
         {
-            var book = new { Id = id, Title = "Sample Book", Author = "Sample Author" };
+            var book = await _context.Books.FindAsync(id);
+            if (book == null)
+            {
+                return NotFound();
+            }
             return Ok(book);
         }
         // POST: api/Books
         [HttpPost]
-        public IActionResult CreateBook([FromBody] Books newBook)
+        public async Task<IActionResult> CreateBook([FromBody] Books newBook)
         {
-            books.Add(newBook);
-            return CreatedAtAction(nameof(GetBookById), new { id = newBook.Id }, newBook);
+            newBook.PublishedDate = DateTime.UtcNow;
+
+            _context.Books.Add(newBook);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetBookById),
+                new { id = newBook.Id }, newBook);
         }
+
         // PUT: api/Books/1
         [HttpPut("{id}")]
-        public IActionResult UpdateBook(int id, [FromBody] Books updatedBook)
+        public async Task<IActionResult> UpdateBook(int id, [FromBody] Books updatedBook)
         {
-            var book = books.FirstOrDefault(b => b.Id == id);
-            if (book == null)
+            if (id != updatedBook.Id)
             {
-                return NotFound();
+                return BadRequest();
             }
-            book.Title = updatedBook.Title;
-            book.Author = updatedBook.Author;
+
+            _context.Entry(updatedBook).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!await BookExists(id))
+                {
+                    return NotFound();
+                }
+                throw;
+            }
+
             return NoContent();
         }
         // DELETE: api/Books/1
         [HttpDelete("{id}")]
-        public IActionResult DeleteBook(int id)
+        public async Task<IActionResult> DeleteBook(int id)
         {
-            var book = books.FirstOrDefault(b => b.Id == id);
+            var book = await _context.Books.FindAsync(id);
             if (book == null)
             {
                 return NotFound();
             }
-            books.Remove(book);
+            _context.Books.Remove(book);
+            await _context.SaveChangesAsync();
             return NoContent();
+        }
+
+        private async Task<bool> BookExists(int id)
+        {
+            return await _context.Books.AnyAsync(e => e.Id == id);
         }
     }
 }
