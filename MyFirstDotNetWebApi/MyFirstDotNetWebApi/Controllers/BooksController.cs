@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using WebApplication1.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using MyFirstDotNetWebApi.Models;
+using static System.Reflection.Metadata.BlobBuilder;
 
-namespace WebApplication1.Controllers
+namespace MyFirstDotNetWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -14,38 +14,29 @@ namespace WebApplication1.Controllers
             new Books { Id = 2, Title = "Book Two", Author = "Author B" },
             new Books { Id = 3, Title = "Book Three", Author = "Author C" }
         };
+        // GET: api/Books
         [HttpGet]
-        public ActionResult<List<Books>> GetAllBooks()
+        public IActionResult Get()
         {
             return Ok(books);
         }
-
+        // GET: api/Books/1
         [HttpGet("{id}")]
-        public ActionResult<Books> GetBookById(int id)
+        public IActionResult GetBookById(int id)
         {
-            var book = books.FirstOrDefault(b => b.Id == id);
-            if (book == null)
-            {
-                return NotFound();
-            }
+            var book = new { Id = id, Title = "Sample Book", Author = "Sample Author" };
             return Ok(book);
         }
+        // POST: api/Books
         [HttpPost]
-        public ActionResult<Books> CreateBook(Books newBook)
+        public IActionResult CreateBook([FromBody] Books newBook)
         {
-            if (newBook == null)
-            {
-                return BadRequest();
-            }
-            else
-            {
-                newBook.Id = books.Max(b => b.Id) + 1;
-                books.Add(newBook);
-                return CreatedAtAction(nameof(GetBookById), new { id = newBook.Id }, newBook);
-            }
+            books.Add(newBook);
+            return CreatedAtAction(nameof(GetBookById), new { id = newBook.Id }, newBook);
         }
+        // PUT: api/Books/1
         [HttpPut("{id}")]
-        public ActionResult UpdateBook(int id, Books updatedBook)
+        public IActionResult UpdateBook(int id, [FromBody] Books updatedBook)
         {
             var book = books.FirstOrDefault(b => b.Id == id);
             if (book == null)
@@ -54,11 +45,11 @@ namespace WebApplication1.Controllers
             }
             book.Title = updatedBook.Title;
             book.Author = updatedBook.Author;
-            return Ok(book);
+            return NoContent();
         }
-
+        // DELETE: api/Books/1
         [HttpDelete("{id}")]
-        public ActionResult DeleteBook(int id)
+        public IActionResult DeleteBook(int id)
         {
             var book = books.FirstOrDefault(b => b.Id == id);
             if (book == null)
