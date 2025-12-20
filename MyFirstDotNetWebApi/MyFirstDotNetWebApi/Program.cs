@@ -6,8 +6,6 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
-builder.Services.AddDbContext<WebApplication1>(options)
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

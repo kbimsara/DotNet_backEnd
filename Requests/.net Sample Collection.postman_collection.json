@@ -15,7 +15,7 @@
 				},
 				"method": "GET",
 				"header": [],
-				"url": "https://localhost:7164/api/books"
+				"url": "{{baseURL}}/api/books"
 			},
 			"response": []
 		},
@@ -27,7 +27,7 @@
 				},
 				"method": "GET",
 				"header": [],
-				"url": "https://localhost:7164/api/books/1"
+				"url": "{{baseURL}}/api/books/1"
 			},
 			"response": []
 		},
@@ -48,7 +48,7 @@
 						}
 					}
 				},
-				"url": "https://localhost:7164/api/books"
+				"url": "{{baseURL}}/api/books"
 			},
 			"response": []
 		},
@@ -69,7 +69,7 @@
 						}
 					}
 				},
-				"url": "https://localhost:7164/api/books/4"
+				"url": "{{baseURL}}/api/books/4"
 			},
 			"response": []
 		},
@@ -85,9 +85,16 @@
 					"mode": "raw",
 					"raw": ""
 				},
-				"url": "https://localhost:7164/api/books/4"
+				"url": "{{baseURL}}/api/books/3"
 			},
 			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "",
+			"type": "default"
 		}
 	]
 }

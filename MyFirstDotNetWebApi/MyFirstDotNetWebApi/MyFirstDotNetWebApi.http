@@ -1,6 +1,6 @@
-@rootURL = http://localhost:5099
+@MyFirstDotNetWebApi_HostAddress = http://localhost:5258
 
-GET {{rootURL}}/weatherforecast/
+GET {{MyFirstDotNetWebApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
