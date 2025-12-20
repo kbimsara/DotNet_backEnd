@@ -27,7 +27,7 @@
 				},
 				"method": "GET",
 				"header": [],
-				"url": "{{baseURL}}/api/books/1"
+				"url": "{{baseURL}}/api/books/2"
 			},
 			"response": []
 		},
@@ -41,7 +41,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \"Title\" : \"Book Foure\", \"Author\" : \"Author D\" }",
+					"raw": "{ \"Title\" : \"Book 3\", \"Author\" : \"Author C\" }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -62,14 +62,14 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \"Title\" : \"Book Foure\", \"Author\" : \"Author E1\" }",
+					"raw": "{ \"Title\" : \"Book 2\", \"Author\" : \"Author B\" }",
 					"options": {
 						"raw": {
 							"language": "json"
 						}
 					}
 				},
-				"url": "{{baseURL}}/api/books/4"
+				"url": "{{baseURL}}/api/books/2"
 			},
 			"response": []
 		},

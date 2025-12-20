@@ -50,12 +50,15 @@ namespace MyFirstDotNetWebApi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateBook(int id, [FromBody] Books updatedBook)
         {
-            if (id != updatedBook.Id)
+            var book = await _context.Books.FindAsync(id);
+            if (book == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(updatedBook).State = EntityState.Modified;
+            book.Title = updatedBook.Title;
+            book.Author = updatedBook.Author;
+
 
             try
             {
