@@ -1,0 +1,6 @@
+@MySecondDotNetApi_HostAddress = http://localhost:5197
+
+GET {{MySecondDotNetApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
