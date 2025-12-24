@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="MyFirstDotNetWebApi/MyFirstDotNetWebApi.csproj" />
+  <Project Path="MySecondDotNetApi/MySecondDotNetApi.csproj" Id="9c7f5dae-5ccb-4bdb-bf9e-643fc3509577" />
 </Solution>
